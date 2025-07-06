@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - ᯓ©𝐁𝐚𝐧𝐝𝐫𝐚𝐤_𝐒𝐡𝐨𝐩_𝐎𝐟𝐟𝐢𝐜𝐢𝐚𝐥 ✰</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://g.top4top.io/p_3474yygrv1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://g.top4top.io/p_3474yygrv1.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #00a3e0;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .welcome-text {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+            background: linear-gradient(90deg, #00a3e0, #00e0a3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .loading-subtext {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            max-width: 80%;
+        }
+        
+        header {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00a3e0, #00e0a3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            flex: 1;
+        }
+        
+        .payment-method {
+            margin-bottom: 30px;
+        }
+        
+        .method-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .method-title i {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        .dana { color: #00a3e0; }
+        .ovo { color: #4c2e88; }
+        .gopay { color: #00aa13; }
+        .qris { color: #ffd700; }
+        
+        .payment-details {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .detail-label {
+            width: 120px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .detail-value {
+            flex: 1;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .transfer-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .dana-btn { background: linear-gradient(135deg, #00a3e0, #0077b6); }
+        .ovo-btn { background: linear-gradient(135deg, #4c2e88, #2e1a5e); }
+        .gopay-btn { background: linear-gradient(135deg, #00aa13, #007a0d); }
+        .qris-btn { background: linear-gradient(135deg, #ffd700, #ff9800); color: #333; }
+        
+        .transfer-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .warning-note {
+            background: rgba(255, 0, 0, 0.1);
+            border-left: 4px solid #f44336;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 0 4px 4px 0;
+            font-size: 14px;
+        }
+        
+        .qris-image {
+            display: block;
+            max-width: 100%;
+            margin: 0 auto;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .qris-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .detail-row {
+                flex-direction: column;
+            }
+            
+            .detail-label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .logo-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="loading-spinner"></div>
+        <div class="welcome-text">WELCOME TO PAYMENT</div>
+        <div class="loading-subtext">Bandrak Shop Official Payment Gateway</div>
+    </div>
+    
+    <header>
+        <div class="logo">
+            <img src="https://b.top4top.io/p_34741xfe11.jpg" alt="Bandrak Shop Logo">
+            <div class="logo-text">ᯓ©𝐁𝐚𝐧𝐝𝐫𝐚𝐤_𝐒𝐡𝐨𝐩_𝐎𝐟𝐟𝐢𝐜𝐢𝐚𝐥 ✰</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="payment-method">
+            <div class="method-title">
+                <i class="fas fa-qrcode qris"></i>
+                <h2>QRIS Payment</h2>
+            </div>
+            
+            <div class="qris-container">
+                <img src="https://f.top4top.io/p_3474ce0c21.jpg" alt="QRIS Code" class="qris-image">
+            </div>
+            
+            <a href="#" class="transfer-btn qris-btn" id="save-qris">
+                <i class="fas fa-download"></i> Save QRIS Image
+            </a>
+            
+            <div class="warning-note">
+                <i class="fas fa-exclamation-circle"></i> After payment, please screenshot/save your payment proof and send it to admin for verification.
+            </div>
+        </div>
+        
+        <div class="payment-method">
+            <div class="method-title">
+                <i class="fab fa-dyalog dana"></i>
+                <h2>DANA Payment</h2>
+            </div>
+            
+            <div class="payment-details">
+                <div class="detail-row">
+                    <div class="detail-label">Account Number</div>
+                    <div class="detail-value">085773652775 <button class="copy-btn" data-text="085773652775"><i class="fas fa-copy"></i></button></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Account Name</div>
+                    <div class="detail-value">INDRA GUNAWAN</div>
+                </div>
+            </div>
+            
+            <a href="https://link.dana.id/qr/5k4j9ku8" class="transfer-btn dana-btn">
+                <i class="fab fa-dyalog"></i> Open DANA App
+            </a>
+            
+            <div class="warning-note">
+                <i class="fas fa-exclamation-circle"></i> Don't transfer to the wrong number! Always check before sending money.
+            </div>
+        </div>
+        
+        <div class="payment-method">
+            <div class="method-title">
+                <i class="fas fa-mobile-alt ovo"></i>
+                <h2>OVO Payment</h2>
+            </div>
+            
+            <div class="payment-details">
+                <div class="detail-row">
+                    <div class="detail-label">Account Number</div>
+                    <div class="detail-value">0895406196907 <button class="copy-btn" data-text="0895406196907"><i class="fas fa-copy"></i></button></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Account Name</div>
+                    <div class="detail-value">INDRA GUNAWAN</div>
+                </div>
+            </div>
+            
+            <a href="https://api.whatsapp.com/send?phone=62895406196907&text=Hi%20Admin,%20I%20want%20to%20pay%20via%20OVO" class="transfer-btn ovo-btn">
+                <i class="fas fa-mobile-alt"></i> Contact Admin for OVO
+            </a>
+            
+            <div class="warning-note">
+                <i class="fas fa-exclamation-circle"></i> After transfer, please send payment proof to admin for verification.
+            </div>
+        </div>
+        
+        <div class="payment-method">
+            <div class="method-title">
+                <i class="fab fa-google-wallet gopay"></i>
+                <h2>Gopay Payment</h2>
+            </div>
+            
+            <div class="payment-details">
+                <div class="detail-row">
+                    <div class="detail-label">Account Number</div>
+                    <div class="detail-value">085133499437 <button class="copy-btn" data-text="085133499437"><i class="fas fa-copy"></i></button></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Account Name</div>
+                    <div class="detail-value">INDRA GUNAWAN</div>
+                </div>
+            </div>
+            
+            <a href="https://api.whatsapp.com/send?phone=62895406196907&text=Hi%20Admin,%20I%20want%20to%20pay%20via%20Gopay" class="transfer-btn gopay-btn">
+                <i class="fab fa-google-wallet"></i> Contact Admin for Gopay
+            </a>
+            
+            <div class="warning-note">
+                <i class="fas fa-exclamation-circle"></i> Make sure you've entered the correct number before transferring.
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 ᯓ©𝐁𝐚𝐧𝐝𝐫𝐚𝐤_𝐒𝐡𝐨𝐩_𝐎𝐟𝐟𝐢𝐜𝐢𝐚𝐥 ✰. All rights reserved.</p>
+        <a href="https://wa.me/+62895406196907" class="contact-btn">
+            <i class="fab fa-whatsapp"></i> Contact Admin
+        </a>
+    </footer>
+    
+    <script>
+        // Loading screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.loading-screen').classList.add('hidden');
+            }, 2000);
+        });
+        
+        // Copy function
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const text = this.getAttribute('data-text');
+                navigator.clipboard.writeText(text).then(() => {
+                    const originalIcon = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(() => {
+                        this.innerHTML = originalIcon;
+                    }, 2000);
+                });
+            });
+        });
+        
+        // Save QRIS function
+        document.getElementById('save-qris').addEventListener('click', function(e) {
+            e.preventDefault();
+            const link = document.createElement('a');
+            link.href = 'https://f.top4top.io/p_3474ce0c21.jpg';
+            link.download = 'QRIS-Bandrak-Shop.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+</body>
+</html>
